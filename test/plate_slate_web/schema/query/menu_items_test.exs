@@ -48,14 +48,15 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
   end
 
   @query """
-  {
-    menuItems(matching: "reu") {
+  query ($term: String) {
+    menuItems(matching: $term) {
       name
     }
   }
   """
+  @variables %{"term" => "reu"}
   test "menuItems field returns menu items filtered by name" do
-    response = get(build_conn(), "/api", query: @query)
+    response = get(build_conn(), "/api", query: @query, variables: @variables)
 
     assert json_response(response, 200) == %{
              "data" => %{
