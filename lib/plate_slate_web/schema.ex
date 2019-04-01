@@ -26,6 +26,10 @@ defmodule PlateSlateWeb.Schema do
     end
   end
 
+  mutation do
+    # Mutation fields will go here
+  end
+
   scalar :date do
     parse(fn input ->
       with %Absinthe.Blueprint.Input.String{value: value} <- input,
