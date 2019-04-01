@@ -10,6 +10,11 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
     field :items, list_of(:menu_item) do
       resolve(&Resolvers.Menu.items_for_category/3)
     end
+
+    field :search, list_of(:search_result) do
+      arg(:matching, non_null(:string))
+      resolve(&Resolvers.Menu.search/3)
+    end
   end
 
   union :search_result do
