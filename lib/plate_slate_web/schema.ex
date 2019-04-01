@@ -20,6 +20,21 @@ defmodule PlateSlateWeb.Schema do
     end
   end
 
+  scalar :date do
+    parse(fn input ->
+      # Parsing logic here
+      case Date.from_iso8601(input.value) do
+        {:ok, date} -> {:ok, date}
+        _ -> :error
+      end
+    end)
+
+    serialize(fn date ->
+      # Serialization logic here
+      Date.to_iso8601(date)
+    end)
+  end
+
   enum :sort_order do
     value(:asc)
     value(:desc)
@@ -41,11 +56,18 @@ defmodule PlateSlateWeb.Schema do
 
     @desc "Priced below a value"
     field :priced_below, :float
+
+    @desc "Added to the menu before this date"
+    field :added_before, :date
+
+    @desc "Added to the menu after this date"
+    field :added_after, :date
   end
 
   object :menu_item do
     field :id, :id
     field :name, :string
     field :description, :string
+    field :added_on, :date
   end
 end
