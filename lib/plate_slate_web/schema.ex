@@ -19,6 +19,11 @@ defmodule PlateSlateWeb.Schema do
       arg(:order, type: :sort_order, default_value: :asc)
       resolve(&Resolvers.Menu.menu_items/3)
     end
+
+    field :search, list_of(:search_result) do
+      arg(:matching, non_null(:string))
+      resolve(&Resolvers.Menu.search/3)
+    end
   end
 
   scalar :date do
