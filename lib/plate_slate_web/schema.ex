@@ -12,33 +12,40 @@ defmodule PlateSlateWeb.Schema do
   alias PlateSlate.{Menu, Repo}
   alias PlateSlateWeb.Resolvers
 
+  query do
+    field :menu_items, list_of(:menu_item) do
+      arg(:filter, :menu_item_filter)
+      arg(:order, type: :sort_order, default_value: :asc)
+      resolve(&Resolvers.Menu.menu_items/3)
+    end
+  end
+
   enum :sort_order do
     value(:asc)
     value(:desc)
   end
 
-  query do
-    @desc "The list of available items on the menu"
-    field :menu_items, list_of(:menu_item) do
-      arg(:matching, :string)
-      arg(:order, type: :sort_order, default_value: :asc)
-
-      resolve(&Resolvers.Menu.menu_items/3)
-    end
-  end
-
-  @desc "Menu Item object"
-  object :menu_item do
-    @desc "The id for the item on the menu"
-    field :id, :id
-
-    @desc "The name of the item on the menu"
+  @desc "Filtering options for the menu item list"
+  input_object :menu_item_filter do
+    @desc "Matching a name"
     field :name, :string
 
-    @desc "The description for the item on the menu"
-    field :description, :string
+    @desc "Matching a category name"
+    field :category, :string
 
-    @desc "The price for the item on the menu"
-    field :price, :float
+    @desc "Matching a tag"
+    field :tag, :string
+
+    @desc "Priced above a value"
+    field :priced_above, :float
+
+    @desc "Priced below a value"
+    field :priced_below, :float
+  end
+
+  object :menu_item do
+    field :id, :id
+    field :name, :string
+    field :description, :string
   end
 end
