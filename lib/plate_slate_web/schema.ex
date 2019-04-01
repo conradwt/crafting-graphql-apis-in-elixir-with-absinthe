@@ -27,7 +27,10 @@ defmodule PlateSlateWeb.Schema do
   end
 
   mutation do
-    # Mutation fields will go here
+    field :create_menu_item, :menu_item do
+      arg(:input, non_null(:menu_item_input))
+      resolve(&Resolvers.Menu.create_item/3)
+    end
   end
 
   scalar :date do
