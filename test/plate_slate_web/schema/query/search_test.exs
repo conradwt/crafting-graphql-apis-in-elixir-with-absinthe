@@ -8,8 +8,7 @@ defmodule PlateSlateWeb.Schema.Query.SearchTest do
   @query """
   query Search($term: String!) {
     search(matching: $term) {
-      ... on MenuItem { name }
-      ... on Category { name }
+      name
       __typename
     }
   }
@@ -21,5 +20,6 @@ defmodule PlateSlateWeb.Schema.Query.SearchTest do
     assert length(results) > 0
     assert Enum.find(results, &(&1["__typename"] == "Category"))
     assert Enum.find(results, &(&1["__typename"] == "MenuItem"))
+    assert Enum.all?(results, & &1["name"])
   end
 end

@@ -4,6 +4,7 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
   alias PlateSlateWeb.Resolvers
 
   object :category do
+    interfaces([:search_result])
     field :name, :string
     field :description, :string
 
@@ -12,9 +13,9 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
     end
   end
 
-  union :search_result do
-    types([:menu_item, :category])
-    # Almost done...
+  interface :search_result do
+    field :name, :string
+
     resolve_type(fn
       %PlateSlate.Menu.Item{}, _ ->
         :menu_item
@@ -54,7 +55,7 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
   end
 
   object :menu_item do
-    # menu fields
+    interfaces([:search_result])
     field :id, :id
     field :name, :string
     field :description, :string
