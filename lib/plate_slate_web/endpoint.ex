@@ -1,5 +1,6 @@
 defmodule PlateSlateWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :plate_slate
+  use Absinthe.Phoenix.Endpoint
 
   socket "/socket", PlateSlateWeb.UserSocket,
     websocket: true,
