@@ -37,6 +37,19 @@ defmodule PlateSlateWeb.Schema do
     end
   end
 
+  subscription do
+    field :new_order, :order do
+      config(fn _args, _info ->
+        {:ok, topic: "*"}
+      end)
+
+      resolve(fn root, _, _ ->
+        IO.inspect(root)
+        {:ok, root}
+      end)
+    end
+  end
+
   @desc "An error encountered trying to persist input"
   object :input_error do
     field :key, non_null(:string)
