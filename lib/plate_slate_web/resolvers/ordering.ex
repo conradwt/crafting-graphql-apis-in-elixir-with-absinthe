@@ -4,6 +4,7 @@ defmodule PlateSlateWeb.Resolvers.Ordering do
   def place_order(_, %{input: place_order_input}, _) do
     case Ordering.create_order(place_order_input) do
       {:ok, order} ->
+        Absinthe.Subscription.publish(PlateSlateWeb.Endpoint, order, new_order: "*")
         {:ok, %{order: order}}
 
       {:error, changeset} ->
