@@ -51,7 +51,7 @@ mix ecto:migrate
 ## Starting the local server
 
 ```bash
-mix -S phx.server
+iex -S mix phx.server
 ```
 
 ## Production Deployment
