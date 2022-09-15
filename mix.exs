@@ -12,10 +12,10 @@ defmodule PlateSlate.Mixfile do
   def project do
     [
       app: :plate_slate,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -41,20 +41,20 @@ defmodule PlateSlate.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.2"},
-      {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.0"},
+      {:phoenix, "~> 1.6.11"},
+      {:phoenix_pubsub, "~> 2.0"},
+      {:phoenix_ecto, "~> 4.4"},
+      {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
-      {:absinthe, "~> 1.4.16"},
-      {:absinthe_plug, "~> 1.4.6"},
-      {:absinthe_phoenix, "~> 1.4.3"},
-      {:absinthe_relay, "~> 1.4.6"}
+      {:gettext, "~> 0.18"},
+      {:jason, "~> 1.2"},
+      {:plug_cowboy, "~> 2.5"},
+      {:absinthe, "~> 1.7.0"},
+      {:absinthe_plug, "~> 1.5.8"},
+      {:absinthe_phoenix, "~> 2.0.2"},
+      {:absinthe_relay, "~> 1.5.2"}
     ]
   end
 

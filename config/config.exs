@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :plate_slate,
   ecto_repos: [PlateSlate.Repo]
